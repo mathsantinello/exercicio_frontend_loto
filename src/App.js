@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Container, Global, HalfA, HalfB} from './styles.js'
+import {Container, Division, Global, HalfA, HalfB} from './styles.js'
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -9,6 +9,7 @@ function App() {
   let [loteryNumbers, setLoteryNumbers]=useState({});
   let [emptySort,setEmptySort]=useState(true);
 
+  
   const fetchData = async() =>{
     const response = await fetch(
       "https://brainn-api-loterias.herokuapp.com/api/v1/loterias"
@@ -49,34 +50,28 @@ function App() {
     <div>
       <Global/>
       <Container>
-      
-      <HalfA>
-        <div>
-          <select onChange={sortNumbers}>
-            <option></option>
-            {loteryOptions.map((i)=>
-              <option value={i.id}>{i.nome}
-                </option>
-            )}
-          </select>
-        <FontAwesomeIcon icon={faCaretDown} pointerEvents='none' color="#848484"></FontAwesomeIcon>
-        </div>
-        
-
-        <h1> MEGA-SENA</h1>
-        
-        <footer> 4531 - 07/04/2020</footer>
-      </HalfA>
-      <HalfB>
-        <div></div>
-
-        <ul>
-          {!emptySort?loteryNumbers.numeros.map(i=><li>{i}</li>):null}
-        </ul>
-
-        <footer> Este sorteio é meramente ilustrativo e não possuí nenhuma ligação com a CAIXA.</footer>
-      </HalfB>
-      
+        <HalfA>
+          <div>
+            <select onChange={sortNumbers}>
+              <option></option>
+              {loteryOptions.map((i)=>
+                <option value={i.id}>{i.nome}
+                  </option>
+              )}
+            </select>
+          <FontAwesomeIcon icon={faCaretDown} pointerEvents='none' color="#848484"></FontAwesomeIcon>
+          </div>
+          <h1> MEGA-SENA</h1>
+          <footer> 4531 - 07/04/2020</footer>
+        </HalfA>
+        <Division/>
+        <HalfB>
+          <div></div>
+          <ul>
+            {!emptySort?loteryNumbers.numeros.map(i=><li>{i}</li>):null}
+          </ul>
+          <footer> Este sorteio é meramente ilustrativo e não possuí nenhuma ligação com a CAIXA.</footer>
+        </HalfB>
       </Container>
       
     </div>

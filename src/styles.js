@@ -2,6 +2,8 @@ import { createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
+const colorPallete = {'mega-sena':'#6BEFA3', 'quina':'#F3F3F3'}
+
 export const Global = createGlobalStyle`
 
     body{
@@ -15,12 +17,14 @@ export const Global = createGlobalStyle`
 export const Container = styled.main`
     display:flex;
     flex-direction: row;
-    height: 100vh;
+    max-height: calc(100vh + 200px);
+    height: max-content;
+    overflow-y: hidden;
 `
 export const HalfA = styled.section`
-    background-color: #6BEFA3;
+    background-color: ${({bg})=>colorPallete.bg||'#6BEFA3'};
     padding: 100px 0px 100px 100px ;
-    height: 100%;
+    height: 100vh;
     width: 40vw;
     display:flex;
     flex-direction: column;
@@ -73,12 +77,12 @@ export const HalfA = styled.section`
 export const HalfB = styled.section`
     padding: 100px 100px 100px 100px ;
     height: 100vh;
-    border-radius:10% 0% 0% 10% / 50% 50% 50% 50%;
     width: 60vw;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #EFEFEF;
+
     >footer{
         align-self: center;
     }
@@ -106,4 +110,16 @@ export const HalfB = styled.section`
             font-weight: 600;
         }   
     }
+`
+export const Division = styled.section`
+    background-color: #EFEFEF;
+    height: 100vh;
+    max-height: 100vh;
+    width: 10vh;
+    position: relative;
+    right: 5vh;
+    padding: 100px 0px 100px 0px;
+    border-radius: 50%/100vh 0 0 100vh;
+    transform: scaleY(1.1) scaleX(4);
+    overflow-y: hidden;
 `
