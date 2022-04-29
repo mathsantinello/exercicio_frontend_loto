@@ -8,8 +8,10 @@ function App() {
   let [loteryData,setLoteryData]=useState([]);
   let [loteryNumbers, setLoteryNumbers]=useState({});
   let [emptySort,setEmptySort]=useState(true);
+  let [backgroundColor, setBackgroundColor]=useState('#6BEFA3')
 
-  
+  const colorPallete = [{name:'mega-sena',color:'#6BEFA3'},{name:'quina',color:'#8666EF'},{name:'lotofácil',color:'#DD7AC6'},{name:'lotomania',color:'#FFAB64'},{name:'timemania',color:'#5AAD7D'},{name:'dia de sorte',color:'#BFAF83'}]
+
   const fetchData = async() =>{
     const response = await fetch(
       "https://brainn-api-loterias.herokuapp.com/api/v1/loterias"
@@ -30,7 +32,7 @@ function App() {
       setEmptySort(true);
       return;
     }
-    const numconcurso=loteryData.find(i=>i.loteriaId.toString()==e.target.value)
+    const numconcurso=loteryData.find(i=>i.loteriaId.toString()===e.target.value)
     const response = await fetch(
       `https://brainn-api-loterias.herokuapp.com/api/v1/concursos/${numconcurso.concursoId}`
     );
@@ -39,6 +41,11 @@ function App() {
     setEmptySort(false)
   }
 
+  const changeColor= (e)=>{
+    const selectedOption = loteryOptions.find(i=>i.id.toString()===e.target.value);
+    let newColor = colorPallete.find(i=>i.name===selectedOption.nome);
+    setBackgroundColor(newColor.color);
+  }
   useEffect(()=>{
       if(loteryData.length===0){
         fetchData();
@@ -49,28 +56,27 @@ function App() {
   return (
     <div>
       <Global/>
-      <Container>
+      <Container bg={backgroundColor}>
         <HalfA>
           <div>
-            <select onChange={sortNumbers}>
+            <select onChange={(e)=>{sortNumbers(e);changeColor(e)}}>
               <option></option>
               {loteryOptions.map((i)=>
-                <option value={i.id}>{i.nome}
+                <option value={i.id} name={i.nome}>{i.nome}
                   </option>
               )}
             </select>
           <FontAwesomeIcon icon={faCaretDown} pointerEvents='none' color="#848484"></FontAwesomeIcon>
           </div>
           <h1> MEGA-SENA</h1>
-          <footer> 4531 - 07/04/2020</footer>
+          <footer> 4531</footer>
         </HalfA>
-        <Division/>
         <HalfB>
           <div></div>
           <ul>
             {!emptySort?loteryNumbers.numeros.map(i=><li>{i}</li>):null}
           </ul>
-          <footer> Este sorteio é meramente ilustrativo e não possuí nenhuma ligação com a CAIXA.</footer>
+          <footer> Este sorteio é meramente ilustrativo e não possui nenhuma ligação com a CAIXA.</footer>
         </HalfB>
       </Container>
       

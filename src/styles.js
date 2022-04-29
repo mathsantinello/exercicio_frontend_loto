@@ -1,13 +1,13 @@
 import { createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
-import {faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
-const colorPallete = {'mega-sena':'#6BEFA3', 'quina':'#F3F3F3'}
+const scaleStretch = 1.2;
+const mediaWidth = '700px'
 
 export const Global = createGlobalStyle`
 
     body{
-        background-color: #EFEFEF;
+        background-color: #6BEFA3;
         font-family: 'Montserrat', sans-serif;
         margin: 0px;
         border: 0px;
@@ -17,31 +17,45 @@ export const Global = createGlobalStyle`
 export const Container = styled.main`
     display:flex;
     flex-direction: row;
-    max-height: calc(100vh + 200px);
     height: max-content;
     overflow-y: hidden;
+    background-color:${props=>props.bg?props.bg:'#6BEFA3'} ;
+    transition: background-color 0.5s ease;
+    @media(max-width:${mediaWidth}){
+        flex-direction: column;
+        overflow-x: hidden;
+        height: calc(100vh+'60px');    
+        width: max-content;
+        padding-top: 60px;
+    }
 `
 export const HalfA = styled.section`
-    background-color: ${({bg})=>colorPallete.bg||'#6BEFA3'};
-    padding: 100px 0px 100px 100px ;
+    padding: 100px 100px 100px 100px ;
     height: 100vh;
-    width: 40vw;
+    width: 24vw;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
+    @media(max-width:${mediaWidth}){
+        padding: 0px 0px 0px 0px ;
+        align-items: center;
+        width: 100vw;
+        height: 40vh;
+    }
     >div{
         >select{
         -webkit-appearance: none;
         -moz-appearance: none;
-        width: max-content;
-        padding: 14px 21px  ;
-        background-color: #FFFFFF;
-        text-transform: uppercase;
-        border-radius: 5px;
+        width: 200px;
+        padding: 14px 20px  ;
+        margin-right: -26px;
+        border-radius: 10px;
         border-style: hidden;
+        background-color: #FFFFFF;
         font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.10em;
         font-weight: 500;
-        margin-right: -25px;
         cursor: pointer;
         }
     }
@@ -54,50 +68,100 @@ export const HalfA = styled.section`
             background-position: center;
             display: inline-block;
             position: relative;
-            left: -10 px;
-            top: 15px;
+            left: -10px;
+            top: 16px;
             width: 60px; 
             height: 60px;
             content: '';
+            @media(max-width:${mediaWidth}){
+                display: block;
+                top: 0px;
+                left: calc(50% - 30px);
+            }
         }
     }
     >footer{
         font-size: 20px;
         font-weight: 600;
         color: #FFFFFF;
+        @media(max-width:${mediaWidth}){
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0.12em;
+        }
+
         &::before{
             content: 'concurso';
             font-weight: 400;
+            letter-spacing: 0.12em;
             display: block;
             position: relative;
-            bottom: 10px; 
+            bottom: 10px;
+            @media(max-width:${mediaWidth}){
+                display: inline;
+                font-size: 16px;
+                content: 'concurso nº ';
+                bottom: 0;
+            }
+        }
+        &::after{
+            content:' - 07/04/2020';
+            @media(max-width:${mediaWidth}){
+                display: none;
+            }
         }
     }
 `
 export const HalfB = styled.section`
-    padding: 100px 100px 100px 100px ;
+    padding: 100px 100px 100px 100px;
     height: 100vh;
-    width: 60vw;
+    width: 76vw;
+    border-radius: 30%/100vh 0 0 100vh;
+    transform: scaleY(${scaleStretch});
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #EFEFEF;
+    @media(max-width:${mediaWidth}){
+        border-radius: 50%/100px 100px 0 0;
+        padding: 0 0;
+        align-items: center;
+        width: 100vw;
+        height: 60vh;
+        transform: scaleY(calc(1/${scaleStretch})) scaleX(${scaleStretch});
+      
+    }
 
     >footer{
         align-self: center;
+        padding-bottom: 0px;
+        transform: scaleY(calc(1/${scaleStretch}));
+        position: relative;
+        bottom: calc(${(scaleStretch-1)/2}* 100vh );
+        @media(max-width:${mediaWidth}){
+            transform: scaleX(calc(1/${scaleStretch})) scaleY(${scaleStretch});
+            width:60%;
+            font-size: 12px;
+        }
     }
     >ul{
+        list-style-type: none;
         margin:0;
         padding: 0;
         text-indent: 0;
-        list-style-type: 0;
         display: flex;
         align-self: center;
         flex-direction: row;
-        column-gap: 40px;
-        row-gap: 40px   ;
+        justify-content: center;
+        gap: 40px;
         flex-wrap: wrap;
-        list-style-type: none;
+        transform: scaleY(calc(1/${scaleStretch}));
+        @media(max-width:${mediaWidth}){
+                transform: scaleX(calc(1/${scaleStretch})) scaleY(${scaleStretch});
+                gap: 20px;
+                width:70%;
+                margin-bottom: 20px;
+            }
         >li{
             height: 100px;
             width: 100px;
@@ -108,18 +172,11 @@ export const HalfB = styled.section`
             background-color:#FFFFFF;
             font-size: 24px;
             font-weight: 600;
+            @media(max-width:${mediaWidth}){
+                height: 60px;
+                width: 60px;
+                font-size: 16px;
+            }
         }   
     }
-`
-export const Division = styled.section`
-    background-color: #EFEFEF;
-    height: 100vh;
-    max-height: 100vh;
-    width: 10vh;
-    position: relative;
-    right: 5vh;
-    padding: 100px 0px 100px 0px;
-    border-radius: 50%/100vh 0 0 100vh;
-    transform: scaleY(1.1) scaleX(4);
-    overflow-y: hidden;
 `
