@@ -1,17 +1,48 @@
 import { createGlobalStyle} from 'styled-components';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const scaleStretch = 1.2;
-const mediaWidth = '700px'
+const mediaWidth = '800px';
+const logoChangeWidth ='1000px';
 
+const loadingAnimation =keyframes`
+  0%, 100% {
+    box-shadow: 0em -2.6em 0em 0em #000000, 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.5), -1.8em -1.8em 0 0em rgba(0,0,0, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.7), 1.8em -1.8em 0 0em #000000, 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.5), 1.8em -1.8em 0 0em rgba(0,0,0, 0.7), 2.5em 0em 0 0em #000000, 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.5), 2.5em 0em 0 0em rgba(0,0,0, 0.7), 1.75em 1.75em 0 0em #000000, 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.5), 1.75em 1.75em 0 0em rgba(0,0,0, 0.7), 0em 2.5em 0 0em #000000, -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.5), 0em 2.5em 0 0em rgba(0,0,0, 0.7), -1.8em 1.8em 0 0em #000000, -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.5), -1.8em 1.8em 0 0em rgba(0,0,0, 0.7), -2.6em 0em 0 0em #000000, -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.5), -2.6em 0em 0 0em rgba(0,0,0, 0.7), -1.8em -1.8em 0 0em #000000;
+  }
+`
 export const Global = createGlobalStyle`
-
     body{
-        background-color: #6BEFA3;
         font-family: 'Montserrat', sans-serif;
         margin: 0px;
         border: 0px;
-        padding: 0px;  
+        padding: 0px;
+        outline: 0px;
+        @media(max-width: ${mediaWidth}){
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
     }
 `
 export const Container = styled.main`
@@ -23,45 +54,45 @@ export const Container = styled.main`
     transition: background-color 0.5s ease;
     @media(max-width:${mediaWidth}){
         flex-direction: column;
-        overflow-x: hidden;
-        height: calc(100vh+'60px');    
+        height: max-content;
         width: max-content;
-        padding-top: 60px;
+        overflow-x: hidden;
+        overflow-y: visible;
     }
 `
 export const HalfA = styled.section`
-    padding: 100px 100px 100px 100px ;
-    height: 100vh;
-    width: 24vw;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100vh;
+    width: 24vw;
+    padding: 100px 3vw 100px 3vw ;
     @media(max-width:${mediaWidth}){
-        padding: 0px 0px 0px 0px ;
         align-items: center;
+        height:40vh;
         width: 100vw;
-        height: 40vh;
+        padding: 5vh 0px 5vh 0px;
     }
     >div{
         >select{
         -webkit-appearance: none;
         -moz-appearance: none;
+        background-color: #FFFFFF;
         width: 200px;
         padding: 14px 20px  ;
         margin-right: -26px;
         border-radius: 10px;
         border-style: hidden;
-        background-color: #FFFFFF;
         font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.10em;
         font-weight: 500;
+        letter-spacing: 0.10em;
+        text-transform: uppercase;
         cursor: pointer;
         }
     }
     >h1{
-        font-size: 32px;
         color: #FFFFFF;
+        font-size: 32px;
         &::before{
             background-image: url('logocaixa.png');
             background-size: 60px 60px;
@@ -70,38 +101,38 @@ export const HalfA = styled.section`
             position: relative;
             left: -10px;
             top: 16px;
-            width: 60px; 
             height: 60px;
+            width: 60px; 
             content: '';
-            @media(max-width:${mediaWidth}){
+            @media(max-width:${logoChangeWidth}){
                 display: block;
-                top: 0px;
+                top: 0;
+                align-self: center;
                 left: calc(50% - 30px);
             }
         }
     }
     >footer{
+        color: #FFFFFF;
         font-size: 20px;
         font-weight: 600;
-        color: #FFFFFF;
         @media(max-width:${mediaWidth}){
             font-weight: 400;
             font-size: 16px;
             letter-spacing: 0.12em;
         }
-
         &::before{
-            content: 'concurso';
-            font-weight: 400;
-            letter-spacing: 0.12em;
             display: block;
             position: relative;
             bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            content: 'concurso';
             @media(max-width:${mediaWidth}){
                 display: inline;
+                bottom: 0;
                 font-size: 16px;
                 content: 'concurso nº ';
-                bottom: 0;
             }
         }
         &::after{
@@ -113,70 +144,85 @@ export const HalfA = styled.section`
     }
 `
 export const HalfB = styled.section`
-    padding: 100px 100px 100px 100px;
-    height: 100vh;
-    width: 76vw;
-    border-radius: 30%/100vh 0 0 100vh;
-    transform: scaleY(${scaleStretch});
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #EFEFEF;
+    height: 100vh;
+    width: 64vw;
+    padding: 100px 3vw 100px 3vw;
+    border-radius: 30%/100vh 0 0 100vh;
+    transform: scaleY(${scaleStretch});
     @media(max-width:${mediaWidth}){
-        border-radius: 50%/100px 100px 0 0;
-        padding: 0 0;
         align-items: center;
+        height: 40vh;
         width: 100vw;
-        height: 60vh;
-        transform: scaleY(calc(1/${scaleStretch})) scaleX(${scaleStretch});
-      
+        padding: 5vh 0px 5vh 0px;
+        border-radius: 50%/100px 100px 0 0;
+        transform: scaleY(1) scaleX(${scaleStretch});
     }
-
     >footer{
         align-self: center;
-        padding-bottom: 0px;
-        transform: scaleY(calc(1/${scaleStretch}));
         position: relative;
+        text-align: center;
         bottom: calc(${(scaleStretch-1)/2}* 100vh );
+        transform: scaleY(calc(1/${scaleStretch}));
         @media(max-width:${mediaWidth}){
-            transform: scaleX(calc(1/${scaleStretch})) scaleY(${scaleStretch});
+            bottom: 0;
             width:60%;
             font-size: 12px;
+            transform: scaleX(calc(1/${scaleStretch})) scaleY(1);
         }
     }
     >ul{
         list-style-type: none;
-        margin:0;
-        padding: 0;
         text-indent: 0;
         display: flex;
         align-self: center;
         flex-direction: row;
         justify-content: center;
-        gap: 40px;
         flex-wrap: wrap;
+        gap: 40px;
+        margin:0;
+        padding: 0;
         transform: scaleY(calc(1/${scaleStretch}));
         @media(max-width:${mediaWidth}){
-                transform: scaleX(calc(1/${scaleStretch})) scaleY(${scaleStretch});
-                gap: 20px;
+                column-gap: 16px;
+                row-gap: 10px;
                 width:70%;
-                margin-bottom: 20px;
+                transform: scaleX(calc(1/${scaleStretch})) scaleY(1);
             }
         >li{
-            height: 100px;
-            width: 100px;
-            border-radius:50%;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color:#FFFFFF;
+            height: 100px;
+            width: 100px;
+            border-radius:50%;
             font-size: 24px;
             font-weight: 600;
             @media(max-width:${mediaWidth}){
-                height: 60px;
-                width: 60px;
+                height: 64px;
+                width: 64px;
                 font-size: 16px;
             }
-        }   
+        }
+        >div{
+            margin: 100px auto;
+            font-size: 25px;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            position: relative;
+            text-indent: -9999em;
+            animation-name: ${loadingAnimation};
+            animation-duration:1.1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+        }
     }
 `
